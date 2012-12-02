@@ -31,6 +31,6 @@ platforms += sni
 platforms += txx9
 platforms += vr41xx
 platforms += wrppmc
-
+platforms += rtl819x
 # include the platform specific files
 include $(patsubst %, $(srctree)/arch/mips/%/Platform, $(platforms))

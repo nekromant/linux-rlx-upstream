@@ -209,6 +209,24 @@ config MACH_JAZZ
 	 Members include the Acer PICA, MIPS Magnum 4000, MIPS Millennium and
 	 Olivetti M700-10 workstations.
 
+config MACH_RTL819X
+	bool "RTL819X from realtek"
+	select CPU_R3000
+	select IRQ_CPU
+	select SYS_HAS_EARLY_PRINTK
+	select CPU_BIG_ENDIAN
+	select RTL_819X
+	select RTL_8196C_GW
+	select RTL_8196C
+	select REALTEK_CPU
+	select SYS_SUPPORTS_BIG_ENDIAN
+	select SYS_HAS_CPU_R3000
+	select SYS_SUPPORTS_32BIT_KERNEL
+	select SYS_SUPPORTS_100HZ
+	select DMA_NONCOHERENT
+	select SERIAL_8250
+	select SERIAL_8250_CONSOLE
+
 config MACH_JZ4740
 	bool "Ingenic JZ4740 based machines"
 	select SYS_HAS_CPU_MIPS32_R1
@@ -842,6 +860,7 @@ source "arch/mips/ath79/Kconfig"
 source "arch/mips/bcm47xx/Kconfig"
 source "arch/mips/bcm63xx/Kconfig"
 source "arch/mips/jazz/Kconfig"
+source "arch/mips/rtl819x/Kconfig"
 source "arch/mips/jz4740/Kconfig"
 source "arch/mips/lantiq/Kconfig"
 source "arch/mips/lasat/Kconfig"

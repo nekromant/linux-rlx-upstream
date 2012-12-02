@@ -1,0 +1,6 @@
+#
+# RTL8196C; RTL8198
+#
+platform-$(CONFIG_MACH_RTL819X)	+= rtl819x/
+cflags-$(CONFIG_MACH_RTL819X)	+= -I$(srctree)/arch/mips/include/asm/mach-rtl819x
+load-$(CONFIG_MACH_RTL819X)	+= 0x80000000

@@ -1,0 +1,4 @@
+config RTL819X_GENERIC
+	bool "Generic 8196c board"
+	depends on MACH_RTL819X
+
