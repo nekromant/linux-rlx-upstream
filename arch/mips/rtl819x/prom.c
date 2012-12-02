@@ -20,6 +20,7 @@
 #include <bspcpu.h>
 #include <bspchip.h>
 
+
 extern char arcs_cmdline[];
 
 #ifdef CONFIG_EARLY_PRINTK
@@ -42,8 +43,10 @@ const char *get_system_type(void)
 	return "RTL8196C";
 }
 
+
+
 /* Do basic initialization */
-void __init prom_init(void)
+void __init prom_meminit(void)
 {
 	u_long mem_size;
        	/*now: always believe DRAM configuration register*/
@@ -143,7 +146,51 @@ void __init prom_init(void)
 	add_memory_region(0, mem_size, BOOT_MEM_RAM);
 }
 
+#define UART0_BASE		0xB8002000
+#define UART0_THR		(UART0_BASE + 0x000)
+#define UART0_FCR		(UART0_BASE + 0x008)
+#define UART0_LSR       (UART0_BASE + 0x014)
+#define TXRST			0x04
+#define CHAR_TRIGGER_14	0xC0
+#define LSR_THRE		0x20
+#define TxCHAR_AVAIL	0x00
+#define TxCHAR_EMPTY	0x20
+
+
+void  __init prom_console_init(void)
+{
+	/* Let's assume bootloader has done the job */
+}
+
+
+void prom_putchar(char c)
+{
+	unsigned int busy_cnt = 0;
+
+	do
+	{
+		/* Prevent Hanging */
+		if (busy_cnt++ >= 30000)
+		{
+			/* Reset Tx FIFO */
+			REG8(UART0_FCR) = TXRST | CHAR_TRIGGER_14;
+			return;
+		}
+	} while ((REG8(UART0_LSR) & LSR_THRE) == TxCHAR_AVAIL);
+
+	/* Send Character */
+	REG8(UART0_THR) = c;
+}
+
+
+
 void __init prom_free_prom_memory(void)
 {
 	return;
+}
+
+void __init prom_init(void)
+{
+   prom_console_init();
+   prom_meminit();
 }

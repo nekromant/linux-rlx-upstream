@@ -211,7 +211,7 @@ config MACH_JAZZ
 
 config MACH_RTL819X
 	bool "RTL819X from realtek"
-	select CPU_R3000
+	select CPU_RLX4281
 	select IRQ_CPU
 	select SYS_HAS_EARLY_PRINTK
 	select CPU_BIG_ENDIAN
@@ -1339,6 +1339,17 @@ config CPU_R3000
 	  of the supported machines have an R4000 (or similar) CPU, R4x00
 	  might be a safe bet.  If the resulting kernel does not work,
 	  try to recompile with R3000.
+
+config CPU_RLX4281
+	bool "RLX4281"
+	depends on SYS_HAS_CPU_R3000
+	select CPU_HAS_WB
+	select CPU_SUPPORTS_32BIT_KERNEL
+	select CPU_SUPPORTS_HIGHMEM
+	help
+	  Basically, from my undertanding that's r3k + a bunch of strange
+	  instructions like mflx0 for interrupts. 
+
 
 config CPU_TX39XX
 	bool "R39XX"

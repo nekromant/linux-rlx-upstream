@@ -21,7 +21,8 @@
 #include <asm/war.h>
 #include <asm/page.h>
 #include <asm/thread_info.h>
-
+#include <rlxregs.h>
+	
 #define PANIC_PIC(msg)					\
 		.set push;				\
 		.set	reorder;			\
@@ -178,7 +179,7 @@ NESTED(handle_int, PT_SIZE, sp)
 	.set	push
 	.set	noat
 	mfc0	k0, CP0_STATUS
-#if defined(CONFIG_CPU_R3000) || defined(CONFIG_CPU_TX39XX)
+#if defined(CONFIG_CPU_R3000) || defined(CONFIG_CPU_RLX4281) || defined(CONFIG_CPU_TX39XX)
 	and	k0, ST0_IEP
 	bnez	k0, 1f
 
@@ -204,6 +205,70 @@ NESTED(handle_int, PT_SIZE, sp)
 	PTR_LA	ra, ret_from_irq
 	j	plat_irq_dispatch
 	END(handle_int)
+
+	.align 6
+NESTED(rlx_vec_dispatch, PT_SIZE, sp)
+   .set push
+   .set noreorder
+   b     0f
+    nop
+   b     1f
+    nop
+   b     2f
+    nop
+   b     3f
+    nop
+   b     4f
+    nop
+   b     5f
+    nop
+   b     6f
+    nop
+   b     7f
+    nop
+
+0:  SAVE_SP
+    b    9f
+     li  k1, 0
+
+1:  SAVE_SP
+    b    9f
+     li  k1, 1
+
+2:  SAVE_SP
+    b    9f
+     li  k1, 2
+
+3:  SAVE_SP
+    b    9f
+     li  k1, 3
+
+4:  SAVE_SP
+    b    9f
+     li  k1, 4
+
+5:  SAVE_SP
+    b    9f
+     li  k1, 5
+
+6:  SAVE_SP
+    b    9f
+     li  k1, 6
+
+7:  SAVE_SP
+    li  k1, 7
+    .set pop
+
+9:  SAVE_ALL_BUT_SP
+    CLI
+    TRACE_IRQS_OFF
+
+    LONG_L  s0, TI_REGS($28)
+    LONG_S  sp, TI_REGS($28)
+    PTR_LA  ra, ret_from_irq
+    move    a0, k1
+    j       rlx_do_lopi_IRQ
+    END(rlx_vec_dispatch)
 
 	__INIT
 
@@ -512,7 +577,7 @@ NESTED(nmi_handler, PT_SIZE, sp)
 	get_saved_sp	/* k1 := current_thread_info */
 	.set	noreorder
 	MFC0	k0, CP0_EPC
-#if defined(CONFIG_CPU_R3000) || defined(CONFIG_CPU_TX39XX)
+#if defined(CONFIG_CPU_RLX4281) || defined(CONFIG_CPU_R3000) || defined(CONFIG_CPU_TX39XX)
 	ori	k1, _THREAD_MASK
 	xori	k1, _THREAD_MASK
 	LONG_L	v1, TI_TP_VALUE(k1)

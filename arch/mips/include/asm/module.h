@@ -88,6 +88,8 @@ search_module_dbetables(unsigned long addr)
 #define MODULE_PROC_FAMILY "MIPS64_R2 "
 #elif defined CONFIG_CPU_R3000
 #define MODULE_PROC_FAMILY "R3000 "
+#elif defined CONFIG_CPU_RLX4281
+#define MODULE_PROC_FAMILY "R3000 "
 #elif defined CONFIG_CPU_TX39XX
 #define MODULE_PROC_FAMILY "TX39XX "
 #elif defined CONFIG_CPU_VR41XX

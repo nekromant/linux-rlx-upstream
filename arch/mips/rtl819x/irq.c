@@ -35,7 +35,7 @@
 
 static struct irqaction irq_cascade = { 
   .handler = no_action,
-  //.mask = CPU_MASK_NONE,
+  .mask = CPU_MASK_NONE,
   .name = "cascade",
 };
 

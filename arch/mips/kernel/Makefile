@@ -4,9 +4,17 @@
 
 extra-y		:= head.o vmlinux.lds
 
-obj-y		+= cpu-probe.o branch.o entry.o genex.o irq.o process.o \
+obj-y		+= cpu-probe.o branch.o entry.o irq.o process.o \
 		   ptrace.o reset.o setup.o signal.o syscall.o \
 		   time.o topology.o traps.o unaligned.o watch.o vdso.o
+
+# Let's keep lexra stuff away from virgin genex.
+# Since diff looks kind of scary
+ifdef CONFIG_CPU_RLX4281
+obj-y+=genex.o
+else
+obj-y+=genex.o
+endif
 
 ifdef CONFIG_FUNCTION_TRACER
 CFLAGS_REMOVE_ftrace.o = -pg
@@ -38,6 +46,7 @@ obj-$(CONFIG_CPU_LOONGSON2)	+= r4k_fpu.o r4k_switch.o
 obj-$(CONFIG_CPU_MIPS32)	+= r4k_fpu.o r4k_switch.o
 obj-$(CONFIG_CPU_MIPS64)	+= r4k_fpu.o r4k_switch.o
 obj-$(CONFIG_CPU_R3000)		+= r2300_fpu.o r2300_switch.o
+obj-$(CONFIG_CPU_RLX4281)		+= r2300_fpu.o r2300_switch.o
 obj-$(CONFIG_CPU_R4300)		+= r4k_fpu.o r4k_switch.o
 obj-$(CONFIG_CPU_R4X00)		+= r4k_fpu.o r4k_switch.o
 obj-$(CONFIG_CPU_R5000)		+= r4k_fpu.o r4k_switch.o
