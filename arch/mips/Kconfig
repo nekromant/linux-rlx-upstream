@@ -213,6 +213,7 @@ config MACH_RTL819X
 	bool "RTL819X from realtek"
 	select CPU_RLX4281
 	select IRQ_CPU
+	select BOOT_RAW
 	select SYS_HAS_EARLY_PRINTK
 	select CPU_BIG_ENDIAN
 	select RTL_819X
