@@ -122,7 +122,7 @@ cflags-$(CONFIG_SB1XXX_CORELIS)	+= $(call cc-option,-mno-sched-prolog) \
 # CPU-dependent compiler/assembler options for optimization.
 #
 cflags-$(CONFIG_CPU_R3000)	+= -march=r3000
-cflags-$(CONFIG_CPU_RLX4281)	+= -march=rlx4281
+cflags-$(CONFIG_CPU_RLX4182)	+= -march=rlx4181
 cflags-$(CONFIG_CPU_TX39XX)	+= -march=r3900
 cflags-$(CONFIG_CPU_R6000)	+= -march=r6000 -Wa,--trap
 cflags-$(CONFIG_CPU_R4300)	+= -march=r4300 -Wa,--trap

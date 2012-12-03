@@ -24,7 +24,7 @@
  */
 #ifdef CONFIG_MIPS_MT_SMTC
 #define STATMASK 0x1e
-#elif defined(CONFIG_CPU_R3000) || defined(CONFIG_CPU_TX39XX) || defined(CONFIG_CPU_RLX4281)
+#elif defined(CONFIG_CPU_R3000) || defined(CONFIG_CPU_TX39XX) || defined(CONFIG_CPU_RLX4182)
 #define STATMASK 0x3f
 #else
 #define STATMASK 0x1f
@@ -157,7 +157,7 @@
 		.endm
 #endif
 
-#ifdef CONFIG_CPU_RLX4281
+#ifdef CONFIG_CPU_RLX4182
         .macro  SAVE_SP
         .set    push
         .set    noat
@@ -341,7 +341,7 @@
 		LONG_L	$30, PT_R30(sp)
 		.endm
 
-#if defined(CONFIG_CPU_RLX4281) | defined(CONFIG_CPU_R3000) || defined(CONFIG_CPU_TX39XX)
+#if defined(CONFIG_CPU_RLX4182) | defined(CONFIG_CPU_R3000) || defined(CONFIG_CPU_TX39XX)
 
 		.macro	RESTORE_SOME
 		.set	push
@@ -636,7 +636,7 @@
 #endif /* CONFIG_MIPS_MT_SMTC */
 		mfc0	t0, CP0_STATUS
 		li	t1, ST0_CU0 | (STATMASK & ~1)
-#if defined(CONFIG_CPU_RLX4281) || defined(CONFIG_CPU_R3000) || defined(CONFIG_CPU_TX39XX)
+#if defined(CONFIG_CPU_RLX4182) || defined(CONFIG_CPU_R3000) || defined(CONFIG_CPU_TX39XX)
 		andi	t2, t0, ST0_IEP
 		srl	t2, 2
 		or	t0, t2
