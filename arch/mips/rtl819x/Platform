@@ -3,4 +3,4 @@
 #
 platform-$(CONFIG_MACH_RTL819X)	+= rtl819x/
 cflags-$(CONFIG_MACH_RTL819X)	+= -I$(srctree)/arch/mips/include/asm/mach-rtl819x
-load-$(CONFIG_MACH_RTL819X)	+= 0xffffffff80000000
+load-$(CONFIG_MACH_RTL819X)	+= 0xffffffff80500000
