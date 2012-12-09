@@ -799,6 +799,16 @@ static inline void cpu_probe_legacy(struct cpuinfo_mips *c, unsigned int cpu)
 		}
 
 		break;
+	case PRID_IMP_LEXRA:
+		c->fpu_id       = FPIR_IMP_NONE;
+		c->cputype      = CPU_R3000;
+		c->isa_level= MIPS_CPU_ISA_I;
+		c->options      = MIPS_CPU_TLB | MIPS_CPU_3K_CACHE | MIPS_CPU_NOFPUEX;
+		c->tlbsize      = 32;
+		c->icache.ways = 2;
+		c->dcache.ways = 2;
+		__cpu_name[cpu] = "Lexra";
+		break;
 	}
 }
 

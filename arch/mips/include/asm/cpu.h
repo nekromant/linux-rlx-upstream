@@ -72,7 +72,7 @@
 #define PRID_IMP_R5432		0x5400
 #define PRID_IMP_R5500		0x5500
 #define PRID_IMP_LOONGSON2	0x6300
-
+#define PRID_IMP_LEXRA	        0xCD00
 #define PRID_IMP_UNKNOWN	0xff00
 
 /*
