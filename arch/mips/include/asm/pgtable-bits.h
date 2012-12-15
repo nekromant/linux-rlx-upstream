@@ -50,7 +50,7 @@
 #define _CACHE_SHIFT                3
 #define _CACHE_MASK                 (7<<3)
 
-#elif defined(CONFIG_CPU_R3000) || defined(CONFIG_CPU_TX39XX)
+#elif defined(CONFIG_CPU_R3000) || defined(CONFIG_CPU_TX39XX) || defined(CONFIG_CPU_RLX4182)
 
 #define _PAGE_PRESENT               (1<<0)  /* implemented in software */
 #define _PAGE_READ                  (1<<1)  /* implemented in software */
@@ -178,7 +178,7 @@ static inline uint64_t pte_to_entrylo(unsigned long pte_val)
 /*
  * Cache attributes
  */
-#if defined(CONFIG_CPU_R3000) || defined(CONFIG_CPU_TX39XX)
+#if defined(CONFIG_CPU_R3000) || defined(CONFIG_CPU_TX39XX) || defined(CONFIG_CPU_RLX4182)
 
 #define _CACHE_CACHABLE_NONCOHERENT 0
 

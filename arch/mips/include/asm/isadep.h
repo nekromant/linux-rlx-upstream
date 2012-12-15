@@ -9,7 +9,7 @@
 #ifndef __ASM_ISADEP_H
 #define __ASM_ISADEP_H
 
-#if defined(CONFIG_CPU_R3000) || defined(CONFIG_CPU_TX39XX)
+#if defined(CONFIG_CPU_R3000) || defined(CONFIG_CPU_TX39XX) || defined(CONFIG_CPU_RLX4182)
 /*
  * R2000 or R3000
  */
