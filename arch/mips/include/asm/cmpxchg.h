@@ -137,6 +137,34 @@ static inline unsigned long __xchg(unsigned long x, volatile void * ptr, int siz
 
 #define __HAVE_ARCH_CMPXCHG 1
 
+#if defined(CONFIG_CPU_RLX4182)
+#define __cmpxchg_asm(ld, st, m, old, new)                              \
+({                                                                      \
+        __typeof(*(m)) __ret;                                           \
+                                                                        \
+                __asm__ __volatile__(                                   \
+                "       .set    push                            \n"     \
+                "       .set    noat                            \n"     \
+                "       .set    mips3                           \n"     \
+                "1:     " ld "  %0, %2          # __cmpxchg_asm \n"     \
+		"	nop					\n"	\
+                "       bne     %0, %z3, 2f                     \n"     \
+                "       .set    mips0                           \n"     \
+                "       move    $1, %z4                         \n"     \
+                "       .set    mips3                           \n"     \
+                "       " st "  $1, %1                          \n"     \
+                "       beqz    $1, 3f                          \n"     \
+                "2:                                             \n"     \
+                "       .subsection 2                           \n"     \
+                "3:     b       1b                              \n"     \
+                "       .previous                               \n"     \
+                "       .set    pop                             \n"     \
+                : "=&r" (__ret), "=R" (*m)                              \
+                : "R" (*m), "Jr" (old), "Jr" (new)                      \
+                : "memory");                                            \
+        __ret;                                                          \
+})
+#else
 #define __cmpxchg_asm(ld, st, m, old, new)				\
 ({									\
 	__typeof(*(m)) __ret;						\
@@ -187,6 +215,7 @@ static inline unsigned long __xchg(unsigned long x, volatile void * ptr, int siz
 									\
 	__ret;								\
 })
+#endif /* RLX4182 */
 
 /*
  * This function doesn't exist, so you'll get a linker error

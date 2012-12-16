@@ -68,6 +68,9 @@ static __inline__ void atomic_add(int i, atomic_t * v)
 			__asm__ __volatile__(
 			"	.set	mips3				\n"
 			"	ll	%0, %1		# atomic_add	\n"
+#if defined(CONFIG_CPU_RLX4182) 
+			"       nop                                     \n"
+#endif
 			"	addu	%0, %2				\n"
 			"	sc	%0, %1				\n"
 			"	.set	mips0				\n"
@@ -111,6 +114,9 @@ static __inline__ void atomic_sub(int i, atomic_t * v)
 			__asm__ __volatile__(
 			"	.set	mips3				\n"
 			"	ll	%0, %1		# atomic_sub	\n"
+#if defined(CONFIG_CPU_RLX4182) 
+			"       nop                                     \n"
+#endif
 			"	subu	%0, %2				\n"
 			"	sc	%0, %1				\n"
 			"	.set	mips0				\n"
@@ -156,6 +162,9 @@ static __inline__ int atomic_add_return(int i, atomic_t * v)
 			__asm__ __volatile__(
 			"	.set	mips3				\n"
 			"	ll	%1, %2	# atomic_add_return	\n"
+#if defined(CONFIG_CPU_RLX4182) 
+			"       nop                                     \n"
+#endif
 			"	addu	%0, %1, %3			\n"
 			"	sc	%0, %2				\n"
 			"	.set	mips0				\n"
@@ -209,6 +218,9 @@ static __inline__ int atomic_sub_return(int i, atomic_t * v)
 			__asm__ __volatile__(
 			"	.set	mips3				\n"
 			"	ll	%1, %2	# atomic_sub_return	\n"
+#if defined(CONFIG_CPU_RLX4182) 
+			"       nop                                     \n"
+#endif
 			"	subu	%0, %1, %3			\n"
 			"	sc	%0, %2				\n"
 			"	.set	mips0				\n"
@@ -271,6 +283,9 @@ static __inline__ int atomic_sub_if_positive(int i, atomic_t * v)
 		__asm__ __volatile__(
 		"	.set	mips3					\n"
 		"1:	ll	%1, %2		# atomic_sub_if_positive\n"
+#if defined(CONFIG_CPU_RLX4182) 
+			"       nop                                     \n"
+#endif
 		"	subu	%0, %1, %3				\n"
 		"	bltz	%0, 1f					\n"
 		"	sc	%0, %2					\n"

@@ -49,6 +49,9 @@ static __inline__ long local_add_return(long i, local_t * l)
 		__asm__ __volatile__(
 		"	.set	mips3					\n"
 		"1:"	__LL	"%1, %2		# local_add_return	\n"
+#if defined(CONFIG_CPU_RLX4182)
+                "       nop                                             \n"
+#endif
 		"	addu	%0, %1, %3				\n"
 			__SC	"%0, %2					\n"
 		"	beqz	%0, 1b					\n"
@@ -94,6 +97,9 @@ static __inline__ long local_sub_return(long i, local_t * l)
 		__asm__ __volatile__(
 		"	.set	mips3					\n"
 		"1:"	__LL	"%1, %2		# local_sub_return	\n"
+#if defined(CONFIG_CPU_RLX4182)
+                "       nop                                             \n"
+#endif
 		"	subu	%0, %1, %3				\n"
 			__SC	"%0, %2					\n"
 		"	beqz	%0, 1b					\n"
