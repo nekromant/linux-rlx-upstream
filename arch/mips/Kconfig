@@ -211,7 +211,7 @@ config MACH_JAZZ
 
 config MACH_RTL819X
 	bool "RTL819X from realtek"
-	select CPU_RLX4182
+	select CPU_RLX4181
 	select IRQ_CPU
 	select BOOT_RAW
 	select SYS_SUPPORTS_ZBOOT	
@@ -1338,8 +1338,8 @@ config CPU_R3000
 	  might be a safe bet.  If the resulting kernel does not work,
 	  try to recompile with R3000.
 
-config CPU_RLX4182
-	bool "RLX4182"
+config CPU_RLX4181
+	bool "RLX4181"
 	depends on SYS_HAS_CPU_R3000
 	select CPU_HAS_WB
 	select CPU_SUPPORTS_32BIT_KERNEL

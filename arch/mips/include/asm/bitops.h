@@ -86,7 +86,7 @@ static inline void set_bit(unsigned long nr, volatile unsigned long *addr)
 			__asm__ __volatile__(
 			"	.set	mips3				\n"
 			"	" __LL "%0, %1		# set_bit	\n"
-#if defined(CONFIG_CPU_RLX4182)
+#if defined(CONFIG_CPU_RLX4181)
 			"       nop                                     \n"
 #endif
 			"	or	%0, %2				\n"
@@ -150,7 +150,7 @@ static inline void clear_bit(unsigned long nr, volatile unsigned long *addr)
 			__asm__ __volatile__(
 			"	.set	mips3				\n"
 			"	" __LL "%0, %1		# clear_bit	\n"
-#if defined(CONFIG_CPU_RLX4182)
+#if defined(CONFIG_CPU_RLX4181)
 			"       nop                                     \n"
 #endif
 			"	and	%0, %2				\n"
@@ -220,7 +220,7 @@ static inline void change_bit(unsigned long nr, volatile unsigned long *addr)
 			__asm__ __volatile__(
 			"	.set	mips3				\n"
 			"	" __LL "%0, %1		# change_bit	\n"
-#if defined(CONFIG_CPU_RLX4182)
+#if defined(CONFIG_CPU_RLX4181)
 			"       nop                                     \n"
 #endif
 			"	xor	%0, %2				\n"
@@ -281,7 +281,7 @@ static inline int test_and_set_bit(unsigned long nr,
 			__asm__ __volatile__(
 			"	.set	mips3				\n"
 			"	" __LL "%0, %1	# test_and_set_bit	\n"
-#if defined(CONFIG_CPU_RLX4182)
+#if defined(CONFIG_CPU_RLX4181)
 			"       nop                                     \n"
 #endif
 			"	or	%2, %0, %3			\n"
@@ -348,7 +348,7 @@ static inline int test_and_set_bit_lock(unsigned long nr,
 			__asm__ __volatile__(
 			"	.set	mips3				\n"
 			"	" __LL "%0, %1	# test_and_set_bit	\n"
-#if defined(CONFIG_CPU_RLX4182)
+#if defined(CONFIG_CPU_RLX4181)
 			"       nop                                     \n"
 #endif
 			"	or	%2, %0, %3			\n"
@@ -433,7 +433,7 @@ static inline int test_and_clear_bit(unsigned long nr,
 			__asm__ __volatile__(
 			"	.set	mips3				\n"
 			"	" __LL	"%0, %1	# test_and_clear_bit	\n"
-#if defined(CONFIG_CPU_RLX4182)
+#if defined(CONFIG_CPU_RLX4181)
 			"       nop                                     \n"
 #endif
 			"	or	%2, %0, %3			\n"
@@ -503,7 +503,7 @@ static inline int test_and_change_bit(unsigned long nr,
 			__asm__ __volatile__(
 			"	.set	mips3				\n"
 			"	" __LL	"%0, %1	# test_and_change_bit	\n"
-#if defined(CONFIG_CPU_RLX4182)
+#if defined(CONFIG_CPU_RLX4181)
 			"       nop                                     \n"
 #endif
 			"	xor	%2, %0, %3			\n"

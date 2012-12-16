@@ -137,7 +137,7 @@ static inline unsigned long __xchg(unsigned long x, volatile void * ptr, int siz
 
 #define __HAVE_ARCH_CMPXCHG 1
 
-#if defined(CONFIG_CPU_RLX4182)
+#if defined(CONFIG_CPU_RLX4181)
 #define __cmpxchg_asm(ld, st, m, old, new)                              \
 ({                                                                      \
         __typeof(*(m)) __ret;                                           \
@@ -215,7 +215,7 @@ static inline unsigned long __xchg(unsigned long x, volatile void * ptr, int siz
 									\
 	__ret;								\
 })
-#endif /* RLX4182 */
+#endif /* RLX4181 */
 
 /*
  * This function doesn't exist, so you'll get a linker error
