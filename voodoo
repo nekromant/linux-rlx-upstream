@@ -1,0 +1,6 @@
+#export PATH=$PATH:~/Dev/hacking/openwrt/openwrt-nprove/staging_dir/toolchain-mips_gcc-4.5-linaro_uClibc-0.9.33.2/bin/
+#export STAGING_DIR=~/Dev/hacking/openwrt/openwrt-nprove/staging_dir/target-mips_uClibc-0.9.33.2_lexra/
+
+CROSS_COMPILE=mips-openwrt-linux- ARCH=mips make $* &&
+mips-openwrt-linux-objcopy -Obinary ./vmlinux ./vmlinux-bin &&
+./fl.sh ./vmlinuz.bin 
